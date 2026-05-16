@@ -699,25 +699,349 @@
   ::-webkit-scrollbar-thumb:hover { background: var(--primary-dim); }
 
   /* ── Responsive ── */
+
+  /* Medium laptops / tablets */
+  @media (max-width: 1100px) {
+    .app {
+      max-width: 100%;
+      padding: 16px;
+    }
+  
+    .main-grid {
+      grid-template-columns: 300px 1fr;
+      gap: 16px;
+    }
+  
+    .logo-text h1 {
+      font-size: 1.15rem;
+      letter-spacing: 3px;
+    }
+  
+    .logo-text p {
+      font-size: 0.6rem;
+    }
+  
+    .leads-table-wrap {
+      max-height: 520px;
+    }
+  }
+  
+  /* Tablets */
   @media (max-width: 900px) {
-    .main-grid { grid-template-columns: 1fr; }
-    .drawer-grid { grid-template-columns: 1fr; }
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+  
+    .header-status {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+  
+    .main-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .drawer-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .voice-orb-wrap,
+    .voice-orb {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .orb-icon {
+      width: 34px;
+      height: 34px;
+    }
+  
+    .action-bar {
+      gap: 8px;
+    }
+  
+    .lead-count {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    .detail-drawer {
+      width: 94%;
+      max-height: 90vh;
+    }
   }
-
-  /* ── Scanning line animation ── */
-  .scan-line {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
-    animation: scan 6s linear infinite;
-    pointer-events: none;
-    z-index: 0;
+  
+  /* Mobile */
+  @media (max-width: 700px) {
+    body {
+      overflow-x: hidden;
+    }
+  
+    .app {
+      padding: 12px;
+    }
+  
+    header {
+      padding: 12px 0 18px;
+      margin-bottom: 18px;
+    }
+  
+    .logo {
+      gap: 10px;
+      align-items: flex-start;
+    }
+  
+    .logo-ring {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .logo-text h1 {
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      line-height: 1.25;
+    }
+  
+    .logo-text p {
+      font-size: 0.55rem;
+      letter-spacing: 1.4px;
+      line-height: 1.4;
+    }
+  
+    .panel-body {
+      padding: 14px;
+    }
+  
+    .panel-header {
+      padding: 12px 14px;
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+    }
+  
+    .voice-section {
+      padding: 20px 14px;
+    }
+  
+    .voice-orb-wrap,
+    .voice-orb {
+      width: 105px;
+      height: 105px;
+    }
+  
+    .orb-ring {
+      inset: -9px;
+    }
+  
+    .orb-ring-2 {
+      inset: -16px;
+    }
+  
+    .field-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  
+    input,
+    select {
+      font-size: 1rem;
+      padding: 11px 12px;
+    }
+  
+    .btn {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 0.58rem;
+      white-space: normal;
+      text-align: center;
+    }
+  
+    .action-bar {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 14px;
+    }
+  
+    .filter-bar {
+      padding: 12px 14px;
+    }
+  
+    .filter-bar input {
+      min-width: 0;
+    }
+  
+    .console-box {
+      max-height: 130px;
+      font-size: 0.65rem;
+    }
+  
+    /* Convert lead table into mobile cards */
+    .leads-table-wrap {
+      max-height: none;
+      overflow-x: hidden;
+    }
+  
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+      width: 100%;
+    }
+  
+    thead {
+      display: none;
+    }
+  
+    tbody tr {
+      margin: 12px 14px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: rgba(0, 212, 255, 0.03);
+      border-radius: 4px;
+    }
+  
+    tbody td {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.06);
+      font-size: 0.85rem;
+    }
+  
+    tbody td:last-child {
+      border-bottom: none;
+    }
+  
+    tbody td::before {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 1.5px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+  
+    tbody td:nth-child(1)::before { content: "Company"; }
+    tbody td:nth-child(2)::before { content: "Address"; }
+    tbody td:nth-child(3)::before { content: "Phone"; }
+    tbody td:nth-child(4)::before { content: "Score"; }
+    tbody td:nth-child(5)::before { content: "Priority"; }
+    tbody td:nth-child(6)::before { content: "Service"; }
+    tbody td:nth-child(7)::before { content: "Action"; }
+  
+    td.company-name,
+    td.address {
+      max-width: 100%;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+    }
+  
+    .expand-btn {
+      width: 100%;
+      padding: 8px 10px;
+    }
+  
+    .empty-state {
+      padding: 35px 14px;
+    }
+  
+    .detail-overlay.open {
+      align-items: flex-start;
+      padding-top: 12px;
+    }
+  
+    .detail-drawer {
+      width: calc(100% - 18px);
+      max-height: 94vh;
+    }
+  
+    .drawer-header {
+      padding: 16px;
+    }
+  
+    .drawer-company {
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      line-height: 1.4;
+    }
+  
+    .drawer-address {
+      font-size: 0.64rem;
+      line-height: 1.5;
+    }
+  
+    .drawer-body {
+      padding: 16px;
+    }
+  
+    .ai-row {
+      flex-direction: column;
+    }
+  
+    .ai-stat {
+      min-width: 100%;
+    }
+  
+    .drawer-actions {
+      flex-direction: column;
+    }
+  
+    .drawer-actions .btn {
+      width: 100%;
+    }
   }
-
-  @keyframes scan {
-    from { top: 0; opacity: 1; }
-    to { top: 100vh; opacity: 0.2; }
+  
+  /* Small phones */
+  @media (max-width: 420px) {
+    .app {
+      padding: 10px;
+    }
+  
+    .logo-ring {
+      width: 36px;
+      height: 36px;
+    }
+  
+    .logo-text h1 {
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+    }
+  
+    .header-status {
+      font-size: 0.6rem;
+    }
+  
+    .voice-orb-wrap,
+    .voice-orb {
+      width: 92px;
+      height: 92px;
+    }
+  
+    .orb-icon {
+      width: 28px;
+      height: 28px;
+    }
+  
+    tbody tr {
+      margin: 10px;
+    }
+  
+    tbody td {
+      grid-template-columns: 90px 1fr;
+      gap: 8px;
+    }
+  
+    .score-badge {
+      width: 28px;
+      height: 28px;
+      font-size: 0.62rem;
+    }
   }
 </style>
 </head>
