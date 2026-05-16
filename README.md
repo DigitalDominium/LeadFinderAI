@@ -1,4 +1,4 @@
-# JARVIS — AI Lead Finder (Web App)
+# Dominium LeadRadar — AI Lead Finder (Web App)
 
 Voice-enabled AI lead finder for contract logistics sales. Built with FastAPI + OpenAI + Google Maps.
 
@@ -13,7 +13,7 @@ ai-lead-finder-web/
 │   ├── voice.py             # Whisper + TTS + command interpreter
 │   └── exporter.py          # Excel export
 ├── static/
-│   └── index.html           # Jarvis UI (voice + leads + drawer)
+│   └── index.html           # Dominium LeadRadar (voice + leads + drawer)
 ├── requirements.txt
 ├── render.yaml              # Render deploy config
 ├── .env.example
