@@ -36,7 +36,7 @@ def text_to_speech(text: str) -> bytes:
 
     response = client.audio.speech.create(
         model="tts-1",
-        voice="onyx",   # Deep, authoritative voice - fits Jarvis persona
+        voice="onyx",   # Deep, authoritative voice - fits Dominium LeadRadar persona
         input=text,
         response_format="mp3",
     )
@@ -48,7 +48,7 @@ def interpret_command(text: str) -> dict:
     Use GPT to interpret a voice command and extract structured intent.
     Returns a dict with: intent, params, response_text
     """
-    system_prompt = """You are JARVIS, an AI assistant for a contract logistics sales team.
+    system_prompt = """You are Dominium LeadRadar, an AI assistant for a contract logistics sales team.
 You help find B2B leads, analyze companies, and support sales prospecting.
 
 When the user speaks a command, extract the intent and parameters, and provide a brief spoken response.
