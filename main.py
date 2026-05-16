@@ -21,7 +21,7 @@ from services.ai_analyzer import analyze_lead_with_ai
 from services.voice import transcribe_audio, text_to_speech, interpret_command
 from services.exporter import export_leads_to_excel
 
-app = FastAPI(title="AI Lead Finder")
+app = FastAPI(title="Dominium LeadRadar")
 
 app.add_middleware(
     CORSMiddleware,
@@ -92,7 +92,7 @@ async def export_leads(req: ExportRequest):
         export_leads_to_excel(req.leads, tmp_path)
         return FileResponse(
             path=str(tmp_path),
-            filename="AI_Lead_Finder_Export.xlsx",
+            filename="Dominium_LeadRadar_Export.xlsx",
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
     except Exception as e:
