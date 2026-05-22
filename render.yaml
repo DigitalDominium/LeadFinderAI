@@ -1,9 +1,13 @@
 services:
   - type: web
-    name: dominium-leadradar
+    name: dominium-leadradar-v2
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    disk:
+      name: leadradar-data
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
       - key: GOOGLE_MAPS_API_KEY
         sync: false
@@ -11,3 +15,7 @@ services:
         sync: false
       - key: OPENAI_MODEL
         value: gpt-4.1-mini
+      - key: DATABASE_PATH
+        value: /var/data/leadradar.db
+      - key: CORS_ALLOW_ORIGINS
+        value: "*"

@@ -1,126 +1,117 @@
-# Dominium LeadRadar — AI Lead Finder (Web App)
+# Dominium LeadRadar V2
 
-Voice-enabled AI lead finder for contract logistics sales. Built with FastAPI + OpenAI + Google Maps.
+AI Sales Intelligence & Prospecting CRM for contract logistics.
 
-## Project Structure
+## What V2 Adds
 
-```
-ai-lead-finder-web/
-├── main.py                  # FastAPI backend
-├── services/
-│   ├── google_maps.py       # Google Places API
-│   ├── ai_analyzer.py       # OpenAI lead scoring
-│   ├── voice.py             # Whisper + TTS + command interpreter
-│   └── exporter.py          # Excel export
-├── static/
-│   └── index.html           # Dominium LeadRadar (voice + leads + drawer)
-├── requirements.txt
-├── render.yaml              # Render deploy config
-├── .env.example
-└── .gitignore
-```
+- Campaign Builder
+- Google Places lead discovery
+- SQLite CRM database
+- Duplicate checker
+- Lead board with stages
+- Follow-up tracking
+- Sales owner assignment
+- AI lead scoring with scoring breakdown
+- AI outreach generator
+- AI proposal outline generator
+- Decision-maker search helper
+- Website scan summary
+- Excel import
+- Management-ready Excel export
+- Voice command support
+- Render deployment config with environment variables
 
-## Local Development
-
-### 1. Clone and set up
+## Local Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-lead-finder-web
-cd ai-lead-finder-web
+git clone https://github.com/DigitalDominium/LeadFinderAI
+cd LeadFinderAI
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-### 2. Set up environment
-
-```bash
 cp .env.example .env
-# Edit .env and add your keys
 ```
 
-### 3. Run locally
+Add your API keys into `.env`.
 
 ```bash
 uvicorn main:app --reload --port 8000
 ```
 
-Open http://localhost:8000
+Open:
 
----
-
-## Deploy to Render
-
-### 1. Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USERNAME/ai-lead-finder-web.git
-git push -u origin main
+```text
+http://localhost:8000
 ```
 
-### 2. Create Render Web Service
+## Render Setup
 
-1. Go to https://render.com → New → Web Service
-2. Connect your GitHub repo
-3. Render auto-detects `render.yaml` — confirm settings:
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+Add these Render environment variables:
 
-### 3. Add environment variables in Render dashboard
+```text
+GOOGLE_MAPS_API_KEY
+OPENAI_API_KEY
+OPENAI_MODEL
+DATABASE_PATH=/var/data/leadradar.db
+```
 
-Go to your service → Environment → Add:
+This V2 includes a persistent disk in `render.yaml` mounted at:
 
-| Key | Value |
-|-----|-------|
-| `GOOGLE_MAPS_API_KEY` | your Google Maps key |
-| `OPENAI_API_KEY` | your OpenAI key |
-| `OPENAI_MODEL` | `gpt-4.1-mini` |
+```text
+/var/data
+```
 
-**Never put API keys in GitHub.**
+The SQLite database path is:
 
-### 4. Deploy
+```text
+/var/data/leadradar.db
+```
 
-Render deploys automatically on every push to `main`.
+## Important Security Note
 
----
+Never commit your real `.env` file.
 
-## How to use
+Only commit:
 
-### Voice commands (click the orb):
-- *"Find me 10 manufacturing companies in Johor Bahru"*
-- *"Analyze the leads"*
-- *"Export to Excel"*
-- *"Clear the results"*
+```text
+.env.example
+```
 
-### Manual controls:
-- Fill in the search parameters and click **Find Leads**
-- Click **Analyze All Leads** to run AI scoring
-- Click **▸ Expand** on any row to open the full detail drawer
-- Click **Download Excel** to export
+## Google APIs Needed
 
-### Lead detail drawer:
-- Full AI analysis: score, priority, pain points, suggested service
-- Sales opening line and full email draft
-- LinkedIn people search and company page buttons
-- Google Maps and website links
+Enable:
 
----
-
-## Google APIs needed
-
-Enable in Google Cloud Console:
 - Places API (New)
 - Geocoding API
 
-Make sure billing is enabled.
+## Main API Routes
 
----
+```text
+GET  /health
+POST /api/search
+POST /api/analyze
+GET  /api/dashboard
+GET  /api/campaigns
+POST /api/campaigns
+GET  /api/leads
+GET  /api/leads/{lead_id}
+PUT  /api/leads/{lead_id}
+POST /api/leads/{lead_id}/analyze
+POST /api/leads/{lead_id}/outreach
+POST /api/leads/{lead_id}/proposal
+POST /api/website-scan
+GET  /api/followups
+POST /api/export
+POST /api/import-excel
+POST /api/transcribe
+POST /api/tts
+POST /api/interpret
+```
 
-## Notes
+## Suggested Git Commands
 
-- Render free tier sleeps after 15 min inactivity (30s cold start). Upgrade to $7/mo for always-on.
-- Voice requires microphone permission in browser (Chrome/Edge recommended).
-- TTS uses OpenAI `onyx` voice — deep and authoritative.
+```bash
+git add .
+git commit -m "Upgrade LeadRadar to V2 sales intelligence CRM"
+git push origin main
+```
