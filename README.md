@@ -1,117 +1,79 @@
-# Dominium LeadRadar V2
+# AI Lead Finder — Contract Logistics CRM
+### Digital Dominium Enterprise · 2026
 
-AI Sales Intelligence & Prospecting CRM for contract logistics.
+A production-grade AI-powered sales prospecting and CRM desktop application
+built for contract logistics sales teams in Johor Bahru and the Singapore corridor.
 
-## What V2 Adds
+---
 
-- Campaign Builder
-- Google Places lead discovery
-- SQLite CRM database
-- Duplicate checker
-- Lead board with stages
-- Follow-up tracking
-- Sales owner assignment
-- AI lead scoring with scoring breakdown
-- AI outreach generator
-- AI proposal outline generator
-- Decision-maker search helper
-- Website scan summary
-- Excel import
-- Management-ready Excel export
-- Voice command support
-- Render deployment config with environment variables
+## Features
 
-## Local Setup
+| Tab | What It Does |
+|---|---|
+| 🔍 Prospect | Find business leads via Google Maps, score & draft outreach with GPT-4 |
+| 📋 Pipeline | Full CRM with stage tracking, contact notes, per-lead editing |
+| 📅 Follow-ups | Daily due/overdue follow-up dashboard with quick actions |
+| 📊 Analytics | KPI cards, stage/priority breakdown bars, top leads leaderboard |
 
+---
+
+## Setup
+
+### 1. Install Python dependencies
 ```bash
-git clone https://github.com/DigitalDominium/LeadFinderAI
-cd LeadFinderAI
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env
 ```
 
-Add your API keys into `.env`.
+### 2. Create your `.env` file
+Create a file named `.env` in the same folder as `main.py`:
 
+```env
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4.1-mini
+```
+
+### 3. Run the app
 ```bash
-uvicorn main:app --reload --port 8000
+python main.py
 ```
 
-Open:
+---
 
-```text
-http://localhost:8000
+## Project Structure
+
+```
+ai_lead_finder/
+├── main.py              # Entry point
+├── app.py               # Full UI — all 4 tabs
+├── config.py            # Env config, constants
+├── database.py          # SQLite persistence layer
+├── requirements.txt
+├── leads.db             # Auto-created on first run
+├── exports/             # Auto-created for Excel exports
+└── services/
+    ├── google_maps.py   # Google Places API integration
+    ├── ai_analyzer.py   # OpenAI GPT analysis engine
+    └── exporter.py      # Styled Excel export
 ```
 
-## Render Setup
+---
 
-Add these Render environment variables:
+## Google Maps API Setup
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Enable **Places API** and **Geocoding API**
+3. Create an API key and add it to `.env`
 
-```text
-GOOGLE_MAPS_API_KEY
-OPENAI_API_KEY
-OPENAI_MODEL
-DATABASE_PATH=/var/data/leadradar.db
-```
+## OpenAI API Setup
+1. Go to [platform.openai.com](https://platform.openai.com)
+2. Create an API key and add it to `.env`
+3. Default model is `gpt-4.1-mini` (cost-efficient). Change to `gpt-4o` for better analysis.
 
-This V2 includes a persistent disk in `render.yaml` mounted at:
+---
 
-```text
-/var/data
-```
-
-The SQLite database path is:
-
-```text
-/var/data/leadradar.db
-```
-
-## Important Security Note
-
-Never commit your real `.env` file.
-
-Only commit:
-
-```text
-.env.example
-```
-
-## Google APIs Needed
-
-Enable:
-
-- Places API (New)
-- Geocoding API
-
-## Main API Routes
-
-```text
-GET  /health
-POST /api/search
-POST /api/analyze
-GET  /api/dashboard
-GET  /api/campaigns
-POST /api/campaigns
-GET  /api/leads
-GET  /api/leads/{lead_id}
-PUT  /api/leads/{lead_id}
-POST /api/leads/{lead_id}/analyze
-POST /api/leads/{lead_id}/outreach
-POST /api/leads/{lead_id}/proposal
-POST /api/website-scan
-GET  /api/followups
-POST /api/export
-POST /api/import-excel
-POST /api/transcribe
-POST /api/tts
-POST /api/interpret
-```
-
-## Suggested Git Commands
-
-```bash
-git add .
-git commit -m "Upgrade LeadRadar to V2 sales intelligence CRM"
-git push origin main
-```
+## Tips for Sales Use
+- Set **Target Service** specifically: e.g. *"bonded warehouse, VAS, cross-border trucking JB-SG"*
+- After finding leads, hit **Analyze All with AI** then **Save All to Pipeline**
+- Use the **Follow-ups tab** every morning as your daily sales briefing
+- Copy WhatsApp drafts directly — they're under 50 words for mobile-friendly cold outreach
+- Export to Excel for management reporting or sharing with the team
